@@ -12,3 +12,11 @@ import Grub from "../components/Grub/index.astro";
         background-color: black;
     }
 </style>
+
+<script>
+    const disabled = localStorage.getItem("bootloaderDisabled") === "true";
+
+    if (disabled) {
+        window.location.href = "/home";
+    }
+</script>
