@@ -11,6 +11,13 @@ import Base from "./base.astro";
             <li>Contact</li>
         </ul>
     </div>
+    <div slot="options" class="options">
+        <div class="context">
+            <p class="option">
+                <span id="disable-bootloader">[ ]</span>&nbsp;Disable bootloader
+            </p>
+        </div>
+    </div>
 </Base>
 
 <style>
@@ -36,28 +43,138 @@ import Base from "./base.astro";
         background-color: #cc241d;
         color: #c2c2c2;
     }
+
+    .options {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    .option.selected {
+        background-color: #cc241d;
+        color: #c2c2c2;
+    }
 </style>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+        const option = document.querySelector("#disable-bootloader");
+        if (option) {
+            const disabled =
+                localStorage.getItem("bootloaderDisabled") === "true";
+            option.textContent = disabled ? "[x]" : "[ ]";
+        }
+
         const entries = Array.from(document.querySelectorAll(".entries li"));
 
+        // --- Context system ---
+        const contexts = Array.from(document.querySelectorAll(".context"));
+        let activeContextIndex = 0;
+
+        function setActiveContext(index: number) {
+            activeContextIndex = index % contexts.length;
+            const ctx = contexts[activeContextIndex];
+
+            // If the context has selectable items (like li or .option)
+            const items = ctx.querySelectorAll("li, .option");
+
+            if (items.length) {
+                // Remove previous selections across all contexts
+                document.querySelectorAll(".selected").forEach((el) => {
+                    el.classList.remove("selected");
+                });
+
+                items[0].classList.add("selected");
+            }
+        }
+
+        // Initialize first context
+        setActiveContext(0);
+
+        // --- Entries selection (context 0) ---
         let index: number = 0;
 
-        function visit(selected: number) {}
+        function visit(selected: number) {
+            // Fade
+            const box = document.querySelector(".content");
+            const bar = document.querySelector(".bar.bottom");
+
+            box!.style.visibility = "hidden";
+            bar!.style.visibility = "visible";
+
+            // Go
+            let url: string;
+            switch (selected) {
+                case 0:
+                    url = "/about";
+                    break;
+                case 1:
+                    url = "/projects?p=0";
+                    break;
+                case 2:
+                    url = "/contact";
+                    break;
+            }
+
+            setTimeout(() => {
+                if (url) window.location.href = url;
+            }, 200);
+        }
 
         function updateSelection() {
-            entries.forEach((el, i) => {
+            const ctx = contexts[activeContextIndex];
+            const items = ctx.querySelectorAll("li, .option");
+
+            items.forEach((el, i) => {
                 el.classList.toggle("selected", i === index);
             });
         }
-
-        updateSelection(); // Initial selection
 
         // Update entry selection
         document.addEventListener("keydown", (event) => {
             if (event.repeat) return;
 
+            const ctx = contexts[activeContextIndex];
+            const items = ctx.querySelectorAll("li, .option");
+
+            // --- TAB = rotate context ---
+            if (event.key === "Tab") {
+                event.preventDefault();
+                activeContextIndex = (activeContextIndex + 1) % contexts.length;
+
+                index = 0;
+                setActiveContext(activeContextIndex);
+                updateSelection();
+                return;
+            }
+
+            // --- SPACEBAR = specific uses ---
+            if (event.code === "Space") {
+                event.preventDefault();
+                // Context 1 is disable bootloader
+                if (activeContextIndex !== 1) return;
+
+                const option = document.querySelector("#disable-bootloader");
+
+                // Load current state (default false)
+                let disabled =
+                    localStorage.getItem("bootloaderDisabled") === "true";
+
+                // Toggle it
+                disabled = !disabled;
+
+                // Save new state
+                localStorage.setItem("bootloaderDisabled", disabled.toString());
+
+                // Update UI
+                option!.textContent = disabled ? "[x]" : "[ ]";
+            }
+
+            // This only works because there are no more lists
+            if (activeContextIndex !== 0) return;
+
+            // --- Up / Down navigation inside current context ---
             if (event.key === "ArrowUp") {
                 event.preventDefault();
                 index = (index - 1 + entries.length) % entries.length;
@@ -70,6 +187,7 @@ import Base from "./base.astro";
                 updateSelection();
             }
 
+            // --- Enter ---
             if (event.key === "Enter") {
                 event.preventDefault();
                 visit(index);
