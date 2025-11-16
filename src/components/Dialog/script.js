@@ -32,6 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
       );
   }
 
+  function visit() {
+    // Navigating away effect
+    const content = document.querySelector(".content");
+    const bottom_bar = document.querySelector(".bar.bottom");
+
+    content.classList.add("navigating-away");
+    bottom_bar.classList.add("navigating-away");
+  }
+
   // Set initial context
   setActiveContext(0);
 
