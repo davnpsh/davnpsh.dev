@@ -31,3 +31,30 @@
     background-color: #cc241d;
     color: #c2c2c2;
 }
+
+/* --- Nav --- */
+.nav {
+    margin-top: 30px;
+    width: 100%;
+}
+
+.nav ul {
+    list-style: none;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav ul:has(> li:only-child) {
+    justify-content: center;
+}
+
+.nav ul li {
+    padding: 2px;
+}
+
+.nav ul li.selected {
+    background-color: #cc241d;
+    color: #c2c2c2;
+}

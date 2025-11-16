@@ -6,10 +6,11 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   const contexts = Array.from(document.querySelectorAll(".context")),
-    entries = Array.from(document.querySelectorAll(".entries li"));
+    entries = Array.from(document.querySelectorAll(".entries li")),
+    navBtns = Array.from(document.querySelectorAll(".nav li"));
 
   let activeContextIndex = 0,
-    activeEntryIndex = 0;
+    activeIndex = 0;
 
   // An active context is the current highlighted option on screen
   function setActiveContext(index) {
@@ -23,13 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
     items[0]?.classList.add("selected");
   }
 
-  // Update selection for a list of entries
-  function updateEntrySelection() {
+  // Update highlight
+  function updateHighlight() {
     contexts[activeContextIndex]
       .querySelectorAll("li, .input")
-      .forEach((el, i) =>
-        el.classList.toggle("selected", i === activeEntryIndex),
-      );
+      .forEach((el, i) => el.classList.toggle("selected", i === activeIndex));
   }
 
   function visit() {
@@ -66,14 +65,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const hasEntries =
       contexts[activeContextIndex].classList.contains("entries");
 
+    // Check if the current context is a nav
+    const hasNav = contexts[activeContextIndex].classList.contains("nav");
+
     // --- TAB = rotate context ---
     if (event.key === "Tab") {
       event.preventDefault();
       activeContextIndex = (activeContextIndex + 1) % contexts.length;
 
-      activeEntryIndex = 0;
+      if (contexts.length > 1) activeIndex = 0;
+
       setActiveContext(activeContextIndex);
-      updateEntrySelection();
+      updateHighlight();
       return;
     }
 
@@ -106,15 +109,27 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Up / Down navigation inside list of entries ---
     if (event.key === "ArrowUp" && hasEntries) {
       event.preventDefault();
-      activeEntryIndex =
-        (activeEntryIndex - 1 + entries.length) % entries.length;
-      updateEntrySelection();
+      activeIndex = (activeIndex - 1 + entries.length) % entries.length;
+      updateHighlight();
     }
 
     if (event.key === "ArrowDown" && hasEntries) {
       event.preventDefault();
-      activeEntryIndex = (activeEntryIndex + 1) % entries.length;
-      updateEntrySelection();
+      activeIndex = (activeIndex + 1) % entries.length;
+      updateHighlight();
+    }
+
+    // --- Left / Right navigation inside list of entries ---
+    if (event.key === "ArrowLeft" && hasNav) {
+      event.preventDefault();
+      activeIndex = (activeIndex - 1 + navBtns.length) % navBtns.length;
+      updateHighlight();
+    }
+
+    if (event.key === "ArrowRight" && hasNav) {
+      event.preventDefault();
+      activeIndex = (activeIndex + 1) % navBtns.length;
+      updateHighlight();
     }
   });
 

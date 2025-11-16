@@ -1,0 +1,27 @@
+---
+import Base from "./base.astro";
+import "./styles.css";
+---
+
+<Base title="Contact">
+    <div slot="description">
+        You can send an email to:
+        <br /><br />
+        <div class="addr"><span>me</span><span>(at)</span>davnpsh.dev</div>
+    </div>
+    <div class="context nav" slot="nav">
+        <ul>
+            <!-- <li>&lt;</li> -->
+            <li data-url="/home" class="default">&lt;Ok&gt;</li>
+            <!-- <li>&gt;</li> -->
+        </ul>
+    </div>
+</Base>
+
+<style>
+    .addr {
+        text-align: center;
+    }
+</style>
+
+<script src="./script.js"></script>
