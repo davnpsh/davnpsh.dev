@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- Entries (basically, a list of options) --- */
+.entries {
+    margin-top: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.entries ul {
+    list-style: none;
+    width: 50%;
+}
+
+.entries ul li {
+    padding-left: 2px;
+}
+
+.entries ul li.selected {
+    background-color: #cc241d;
+    color: #c2c2c2;
+}
+
+/* --- Options --- */
+.option.selected {
+    background-color: #cc241d;
+    color: #c2c2c2;
+}
