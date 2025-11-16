@@ -33,12 +33,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function visit() {
+    const selected = document.querySelectorAll(".selected")[0];
+    const url = selected.getAttribute("data-url");
+
+    if (!url) return;
+
     // Navigating away effect
     const content = document.querySelector(".content");
     const bottom_bar = document.querySelector(".bar.bottom");
 
     content.classList.add("navigating-away");
     bottom_bar.classList.add("navigating-away");
+
+    // Navigate
+    if (/^https?:\/\//.test(url)) {
+      window.open(url, "_self");
+    } else {
+      setTimeout(() => {
+        window.location.href = url;
+      }, 200);
+    }
   }
 
   // Set initial context
@@ -86,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Enter = select ---
     if (event.key === "Enter") {
       event.preventDefault();
-      // if (hasEntries) visit(activeEntryIndex);
+      visit();
     }
 
     // --- Up / Down navigation inside list of entries ---
