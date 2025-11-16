@@ -34,8 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
   function visit() {
     const selected = document.querySelectorAll(".selected")[0];
     const url = selected.getAttribute("data-url");
+    const disabled = selected.classList.contains("disabled");
 
-    if (!url) return;
+    if (!url || disabled) return;
 
     // Navigating away effect
     const content = document.querySelector(".content");

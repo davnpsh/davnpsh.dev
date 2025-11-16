@@ -26,6 +26,14 @@
     color: #c2c2c2;
 }
 
+.entries ul li.disabled {
+    color: #989898;
+}
+
+.entries ul li.selected.disabled {
+    background-color: #555555;
+}
+
 /* --- Options --- */
 .input.selected {
     background-color: #cc241d;
