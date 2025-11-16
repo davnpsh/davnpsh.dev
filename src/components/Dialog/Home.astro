@@ -8,6 +8,7 @@ import Base from "./base.astro";
         <ul>
             <li class="default">About</li>
             <li>Projects</li>
+            <li>Blog</li>
             <li>Contact</li>
         </ul>
     </div>
@@ -113,6 +114,9 @@ import Base from "./base.astro";
                     url = "/projects?p=0";
                     break;
                 case 2:
+                    url = "/blog";
+                    break;
+                case 3:
                     url = "/contact";
                     break;
             }
