@@ -9,6 +9,26 @@ const formattedDescription = project.description.replace(/\n/g, "<br>");
 <Base title={project.name} width="650px">
     <p class="order" slot="order">{id}/{totalProjects}</p>
     <div slot="description" set:html={formattedDescription} />
+    <div class="context entries" slot="entries">
+        <ul>
+            {
+                project.page_link && (
+                    <li data-url={project.page_link}>
+                        <span class="iconify" data-icon="mdi-open-in-new" />
+                        Project webpage
+                    </li>
+                )
+            }
+            {
+                project.source_code_link && (
+                    <li data-url={project.source_code_link}>
+                        <span class="iconify" data-icon="mdi-git" />
+                        Source code
+                    </li>
+                )
+            }
+        </ul>
+    </div>
     <div class="context nav" slot="nav">
         <ul>
             {
@@ -38,3 +58,4 @@ const formattedDescription = project.description.replace(/\n/g, "<br>");
 </style>
 
 <script src="./script.js"></script>
+<script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
