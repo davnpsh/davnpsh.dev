@@ -9,6 +9,18 @@ const formattedDescription = project.description.replace(/\n/g, "<br>");
 <Base title={project.name} width="650px">
     <p class="order" slot="order">{id}/{totalProjects}</p>
     <div slot="description" set:html={formattedDescription} />
+    <div slot="image" class="image_container">
+        {
+            project.image_path && (
+                <img
+                    class="project_img"
+                    src={project.image_path}
+                    alt={project.name}
+                />
+            )
+        }
+    </div>
+
     <div class="context entries" slot="entries">
         <ul>
             {
@@ -33,7 +45,7 @@ const formattedDescription = project.description.replace(/\n/g, "<br>");
         <ul>
             {
                 id > 1 ? (
-                    <li data-url={`/project/${id - 1}`}>&lt;</li>
+                    <li data-url={`/project/${parseInt(id) - 1}`}>&lt;</li>
                 ) : (
                     <>&nbsp;</>
                 )
@@ -41,7 +53,7 @@ const formattedDescription = project.description.replace(/\n/g, "<br>");
             <li data-url="/home">&lt;Home&gt;</li>
             {
                 id < totalProjects ? (
-                    <li data-url={`/project/${id + 1}`}>&gt;</li>
+                    <li data-url={`/project/${parseInt(id) + 1}`}>&gt;</li>
                 ) : (
                     <>&nbsp;</>
                 )

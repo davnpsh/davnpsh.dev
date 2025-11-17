@@ -5,5 +5,12 @@
     "image_path": "",
     "page_link": "",
     "source_code_link": "https://github.com/davnpsh/homelab"
+  },
+  {
+    "name": "automata",
+    "description": "An npm package that provides a way to create and manipulate finite automatons based on regular expressions. This project also features a webpage in which the user can create, visualize and test an automaton based on a reg-ex.",
+    "image_path": "/images/automaton.png",
+    "page_link": "https://automata-demo.vercel.app/",
+    "source_code_link": "https://github.com/davnpsh/automata"
   }
 ]
