@@ -1,26 +1,18 @@
 ---
 import Base from "./base.astro";
 import "./styles.css";
-
-// images
-const source = import.meta.glob("../../data/about/*.{png,jpg,jpeg,webp}", {
-    eager: true,
-});
-const gallery = Object.values(source).map((img) => img.default);
-// duplicate for carousel loop
-const images = [...gallery, ...gallery];
 ---
 
 <Base title="About">
-    <div slot="description">hi</div>
-    <div class="carousel" slot="image">
-        <div id="track">
-            {
-                images.map((image) => (
-                    <img src={image.src} alt="Carousel image" />
-                ))
-            }
-        </div>
+    <div slot="description">
+        Hi~
+        <br /><br />
+        I am a software developer who likes working on hobbies, tinkering my homelab
+        and contributing to open source.
+        <br /><br />
+        I also love playing hack and slash, horror or adventure games.
+        <br /><br />
+        Here are some relevant links:
     </div>
     <div class="context entries" slot="entries">
         <ul>
@@ -39,86 +31,3 @@ const images = [...gallery, ...gallery];
 
 <script src="./script.js"></script>
 <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
-<!-- the following script was vibe-coded, sorry -->
-<script is:inline>
-    const track = document.getElementById("track");
-
-    async function waitForImagesReady(container) {
-        const imgs = Array.from(container.querySelectorAll("img"));
-        await Promise.all(
-            imgs.map((img) => {
-                if (img.complete && img.naturalWidth !== 0)
-                    return Promise.resolve();
-                return new Promise((res) => {
-                    img.addEventListener("load", res, { once: true });
-                    img.addEventListener("error", res, { once: true });
-                });
-            }),
-        );
-        return imgs;
-    }
-
-    function setupAnimation() {
-        if (!track) return;
-        const children = Array.from(track.children);
-        const total = track.scrollWidth;
-        if (!total) {
-            requestAnimationFrame(setupAnimation);
-            return;
-        }
-
-        const firstSetWidth = total / 2;
-
-        track.style.setProperty("--scrollWidth", `${firstSetWidth}px`);
-    }
-
-    // run after images load and on resize
-    (async () => {
-        await waitForImagesReady(track);
-        setupAnimation();
-        window.addEventListener("resize", () => {
-            // debounce resize
-            clearTimeout(window.__carouselResizeTimeout);
-            window.__carouselResizeTimeout = setTimeout(setupAnimation, 120);
-        });
-    })();
-</script>
-
-<style>
-    :root {
-        --scrollWidth: 0px;
-        --duration: 10s; /* fallback speed */
-        --slide-height: 150px;
-    }
-
-    .carousel {
-        margin-top: 20px;
-        overflow: hidden;
-        width: 100%;
-    }
-
-    #track {
-        width: 100%;
-        display: flex;
-        gap: 0;
-        animation: scroll var(--duration) linear infinite;
-        will-change: transform;
-    }
-
-    .carousel img {
-        height: var(--slide-height);
-        width: auto;
-        object-fit: cover;
-        flex-shrink: 0;
-        display: block;
-    }
-
-    @keyframes scroll {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(calc(var(--scrollWidth) * -1));
-        }
-    }
-</style>
