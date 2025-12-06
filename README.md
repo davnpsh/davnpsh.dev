@@ -32,7 +32,7 @@ Build the Docker image:
 docker build -t astro-builder .
 ```
 
-**NOTE:** This is to create a builder container, which is just basically a Node wrapper for not having to install and manage different versions of it.
+**NOTE to myself:** This is to create a builder container, which is just basically a Node wrapper for not having to install and manage different versions of it.
 
 Then, build:
 
