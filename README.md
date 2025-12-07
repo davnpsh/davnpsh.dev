@@ -37,7 +37,7 @@ docker build -t website-builder .
 Then, build:
 
 ```sh
-docker run --rm -v .:/app website-builder
+docker run --rm -v ./dist:/app/dist website-builder
 ```
 
 ## Serve
