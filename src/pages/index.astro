@@ -13,23 +13,27 @@ import Grub from "../subpages/boot/grub.astro";
 </style>
 
 <script>
-    function load_content(id: string) {
-        const element = document.getElementById(id);
-        element!.style.display = "initial";
+    function set_boot_stage(id: string) 
+    {
+        localStorage.setItem("boot-stage", id);
+        
+        document.dispatchEvent(
+            new CustomEvent("stage-change", { detail: id }),
+        );
     }
+    
+    document.addEventListener("stage-change", (e: any) => {
+        document.querySelectorAll(".content").forEach((element) => {
+            (element as HTMLElement).style.display = "none";
+        });
+
+        const element = document.getElementById(e.detail);
+
+        if (element) element.style.display = "initial";
+    });
 
     document.addEventListener("DOMContentLoaded", () => {
         // Load GRUB first always
-        localStorage.setItem("boot-stage", "grub");
-
-        setInterval(() => {
-            document.querySelectorAll(".content").forEach((element) => {
-                // @ts-ignore
-                element!.style.display = "none";
-            });
-
-            const id = localStorage.getItem("boot-stage");
-            load_content(id!);
-        }, 200);
+        set_boot_stage("grub");
     });
 </script>
