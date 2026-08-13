@@ -1,10 +1,25 @@
 ---
+import { Font } from "astro:assets";
+
 import Grub from "../subpages/boot/grub.astro";
 ---
 
-<div class="content" id="grub">
-    <Grub />
-</div>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <Font cssVariable="--font-unifont" />
+        <title>daru's system</title>
+    </head>
+    <body>
+        <div class="content" id="grub">
+            <Grub />
+        </div>
+    </body>
+</html>
 
 <style>
     .content {
