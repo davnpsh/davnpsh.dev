@@ -2,6 +2,7 @@
 import { Font } from "astro:assets";
 
 import Grub from "../subpages/boot/grub.astro";
+import Log from "../subpages/boot/log.astro";
 ---
 
 <html lang="en">
@@ -18,6 +19,9 @@ import Grub from "../subpages/boot/grub.astro";
         <div class="content" id="grub">
             <Grub />
         </div>
+        <div class="content" id="log">
+            <Log />
+        </div>
     </body>
 </html>
 
@@ -28,15 +32,12 @@ import Grub from "../subpages/boot/grub.astro";
 </style>
 
 <script>
-    function set_boot_stage(id: string) 
-    {
+    function set_boot_stage(id: string) {
         localStorage.setItem("boot-stage", id);
-        
-        document.dispatchEvent(
-            new CustomEvent("stage-change", { detail: id }),
-        );
+
+        document.dispatchEvent(new CustomEvent("stage-change", { detail: id }));
     }
-    
+
     document.addEventListener("stage-change", (e: any) => {
         document.querySelectorAll(".content").forEach((element) => {
             (element as HTMLElement).style.display = "none";

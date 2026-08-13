@@ -138,4 +138,75 @@ import Tty from "../../layouts/tty.astro";
     }
 </style>
 
-<script></script>
+<script>
+    function set_boot_stage(id: string) {
+        localStorage.setItem("boot-stage", id);
+
+        document.dispatchEvent(new CustomEvent("stage-change", { detail: id }));
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const entries = Array.from(document.querySelectorAll(".entries li"));
+        const reminderMessage = document.querySelector(".reminder");
+        const secondsBox = document.querySelector(".seconds");
+
+        let index: number = 0;
+        let countdown: number = 10; // 10 secs default
+
+        function boot(selected: number) {
+            if (selected == 0) {
+                set_boot_stage("log");
+            } else if (selected == 1) {
+                window.open("https://github.com/davnpsh/davnpsh.dev", "_blank");
+            }
+        }
+
+        function updateSelection() {
+            entries.forEach((el, i) => {
+                el.classList.toggle("selected", i === index);
+            });
+        }
+
+        updateSelection(); // Initial selection
+
+        // Start countdown
+        const interval = setInterval(() => {
+            countdown--;
+            secondsBox!.textContent = countdown.toString();
+
+            if (countdown == 0) {
+                stopCountdown();
+                boot(0);
+            }
+        }, 1000);
+
+        function stopCountdown() {
+            clearInterval(interval);
+            (reminderMessage as HTMLElement).style.visibility = "hidden";
+        }
+
+        // Update entry selection
+        document.addEventListener("keydown", (event) => {
+            if (event.repeat) return;
+
+            stopCountdown();
+
+            if (event.key === "ArrowUp") {
+                event.preventDefault();
+                index = (index - 1 + entries.length) % entries.length;
+                updateSelection();
+            }
+
+            if (event.key === "ArrowDown") {
+                event.preventDefault();
+                index = (index + 1) % entries.length;
+                updateSelection();
+            }
+
+            if (event.key === "Enter") {
+                event.preventDefault();
+                boot(index);
+            }
+        });
+    });
+</script>
