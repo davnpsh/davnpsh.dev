@@ -1,17 +1,35 @@
 ---
-
+import Grub from "../subpages/boot/grub.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<div class="content" id="grub">
+    <Grub />
+</div>
+
+<style>
+    .content {
+        display: none;
+    }
+</style>
+
+<script>
+    function load_content(id: string) {
+        const element = document.getElementById(id);
+        element!.style.display = "initial";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Load GRUB first always
+        localStorage.setItem("boot-stage", "grub");
+
+        setInterval(() => {
+            document.querySelectorAll(".content").forEach((element) => {
+                // @ts-ignore
+                element!.style.display = "none";
+            });
+
+            const id = localStorage.getItem("boot-stage");
+            load_content(id!);
+        }, 200);
+    });
+</script>

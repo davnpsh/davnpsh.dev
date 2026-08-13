@@ -1,0 +1,38 @@
+---
+/*
+Basic layout for a TTY look and feel.
+*/
+
+import { Font } from "astro:assets";
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <Font cssVariable="--font-unifont" />
+        <title>daru's system</title>
+    </head>
+    <body>
+        <slot />
+    </body>
+</html>
+
+<style>
+    html,
+    body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+
+        font-family: var(--font-unifont), monospace;
+        font-size: 18px;
+        user-select: none;
+        -webkit-font-smoothing: none;
+        font-smooth: never;
+        image-rendering: pixelated;
+    }
+</style>
