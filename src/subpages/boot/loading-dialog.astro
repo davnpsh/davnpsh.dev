@@ -37,5 +37,43 @@ import Dialog from "../../components/dialog.astro";
         top: 0;
         left: 50%;
         transform: translate(-50%, -100%);
+        color: white;
+        mix-blend-mode: difference;
+        z-index: 100;
     }
 </style>
+
+<script>
+    function set_boot_stage(id: string) {
+        localStorage.setItem("boot-stage", id);
+
+        document.dispatchEvent(new CustomEvent("stage-change", { detail: id }));
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const progress_bar = document.getElementById("progress");
+        const percentage = document.getElementById("percentage");
+
+        const stages = [0, 23, 45, 50, 77, 83, 100];
+        let index = 0;
+
+        function update_progress() {
+            if (index > stages.length - 1) {
+                set_boot_stage("home");
+                return;
+            }
+
+            (progress_bar as HTMLElement).style.width = `${stages[index]}%`;
+            (percentage as HTMLElement).textContent = `${stages[index++]}%`;
+
+            setTimeout(update_progress, 150);
+        }
+
+        // Show progress animation
+        document.addEventListener("stage-change", (e: any) => {
+            if (e.detail === "loading-dialog") {
+                update_progress();
+            }
+        });
+    });
+</script>

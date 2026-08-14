@@ -111,7 +111,7 @@ import Log from "../../data/bootlog.txt?raw";
 
             setTimeout(() => {
                 set_boot_stage("loading-dialog");
-            }, 3000);
+            }, 2000);
         }
 
         let index = 0;
@@ -127,14 +127,10 @@ import Log from "../../data/bootlog.txt?raw";
 
             let delay = 0;
 
-            if (index < 5) {
+            if (index < 3) {
                 delay = 800;
-            } else if (index < 20) {
+            } else {
                 delay = 20;
-            } else if (index == 20) {
-                delay = 2000;
-            } else if (index > 495) {
-                delay = 120;
             }
 
             setTimeout(print_log, delay);
