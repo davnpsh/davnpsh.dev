@@ -57,7 +57,12 @@ import Home from "../subpages/home/normal.astro";
     });
 
     document.addEventListener("DOMContentLoaded", () => {
-        // Load GRUB first always
-        set_boot_stage("grub");
+        let bootloader = localStorage.getItem("disable-bootloader");
+
+        if (bootloader === "true") {
+            set_boot_stage("home");
+        } else {
+            set_boot_stage("grub");
+        }
     });
 </script>
