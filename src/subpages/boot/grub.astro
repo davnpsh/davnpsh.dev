@@ -155,6 +155,7 @@ import Tty from "../../layouts/tty.astro";
 
         function boot(selected: number) {
             if (selected == 0) {
+                document.removeEventListener("keydown", handle_input);
                 set_boot_stage("log");
             } else if (selected == 1) {
                 window.open("https://github.com/davnpsh/davnpsh.dev", "_blank");
@@ -185,15 +186,14 @@ import Tty from "../../layouts/tty.astro";
             (reminderMessage as HTMLElement).style.visibility = "hidden";
         }
 
-        // Update entry selection
-        document.addEventListener("keydown", (event) => {
+        function handle_input(event: any) {
             if (event.repeat) return;
 
             stopCountdown();
 
             if (event.key === "ArrowUp") {
                 event.preventDefault();
-                if (index > 0) index--; 
+                if (index > 0) index--;
                 updateSelection();
             }
 
@@ -207,6 +207,9 @@ import Tty from "../../layouts/tty.astro";
                 event.preventDefault();
                 boot(index);
             }
-        });
+        }
+
+        // Handle entry selection
+        document.addEventListener("keydown", handle_input);
     });
 </script>

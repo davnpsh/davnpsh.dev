@@ -1,0 +1,86 @@
+---
+/*
+Dialog background
+*/
+
+import Tty from "./tty.astro";
+
+const { instructions = "true" } = Astro.props;
+---
+
+<Tty>
+    <div id="dialog_bg">
+        <div class="fade-step dialog"><slot /></div>
+        {
+            (instructions === "true") && (
+                <div class="bar bottom instructions">
+                    &lt;TAB&gt; moves; &lt;SPACE&gt; or &lt;ENTER&gt; selects
+                </div>
+            )
+        }
+    </div>
+</Tty>
+
+<style>
+    * {
+        box-sizing: border-box;
+        cursor: initial;
+    }
+
+    #dialog_bg {
+        width: 100%;
+        height: 100vh;
+        background-color: #6a9fb5;
+    }
+
+    .bar {
+        position: fixed;
+        width: 100%;
+        height: 25px;
+    }
+
+    .bar.bottom {
+        padding-left: 15px;
+        bottom: 0;
+        font-weight: bold;
+    }
+
+    /* Appearing on screen */
+    .fade-step {
+        opacity: 0;
+        animation: fadeIn 0s linear forwards;
+    }
+
+    .fade-step.instructions {
+        animation-delay: 50ms;
+    }
+    .fade-step.dialog {
+        animation-delay: 100ms;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Navigating away effect */
+    .dialog.navigating-away {
+        visibility: hidden;
+    }
+
+    .bar.bottom.navigating-away {
+        visibility: visible;
+    }
+</style>
+
+<script>
+    window.addEventListener("pageshow", () => {
+        document
+            .querySelectorAll(".navigating-away")
+            .forEach((el) => el.classList.remove("navigating-away"));
+    });
+</script>

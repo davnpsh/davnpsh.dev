@@ -3,6 +3,7 @@ import { Font } from "astro:assets";
 
 import Grub from "../subpages/boot/grub.astro";
 import Log from "../subpages/boot/log.astro";
+import LoadingDialog from "../subpages/boot/loading-dialog.astro";
 ---
 
 <html lang="en">
@@ -21,6 +22,9 @@ import Log from "../subpages/boot/log.astro";
         </div>
         <div class="content" id="log">
             <Log />
+        </div>
+        <div class="content" id="loading-dialog">
+            <LoadingDialog />
         </div>
     </body>
 </html>
