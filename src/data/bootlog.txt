@@ -1,0 +1,14 @@
+[    0.000000] Command line: BOOT_IMAGE=/install.amd/vm vga=788 initrd=/install.amd/initrd.gz --- quiet
+[    0.041203] Initializing cgroup subsys cpuset
+[    0.312556] ACPI: Core revision 20220331
+[    0.601233] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+[    1.045981] usb 1-1: new full-speed USB device number 2 using xhci_hcd
+[    1.203100] sd 0:0:0:0: [sda] Attached SCSI disk
+[    1.512877] Loading, please wait...
+[    2.001220] /init: mounting /proc
+[    2.104330] /init: mounting /sys
+[    2.209940] /init: mounting /dev
+[    2.550012] Loading kernel modules...
+[    2.890442] Detecting hardware, this may take a moment...
+[    3.412200] Starting installer components...
+[    3.998117] Loading additional components
