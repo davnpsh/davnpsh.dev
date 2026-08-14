@@ -193,13 +193,13 @@ import Tty from "../../layouts/tty.astro";
 
             if (event.key === "ArrowUp") {
                 event.preventDefault();
-                index = (index - 1 + entries.length) % entries.length;
+                if (index > 0) index--; 
                 updateSelection();
             }
 
             if (event.key === "ArrowDown") {
                 event.preventDefault();
-                index = (index + 1) % entries.length;
+                if (index < entries.length - 1) index++;
                 updateSelection();
             }
 
