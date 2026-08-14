@@ -4,12 +4,13 @@ import { Font } from "astro:assets";
 import Grub from "../subpages/boot/grub.astro";
 import Log from "../subpages/boot/log.astro";
 import LoadingDialog from "../subpages/boot/loading-dialog.astro";
+import Home from "../subpages/home/normal.astro";
 ---
 
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/ico" href="/favicon.ico" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
@@ -25,6 +26,9 @@ import LoadingDialog from "../subpages/boot/loading-dialog.astro";
         </div>
         <div class="content" id="loading-dialog">
             <LoadingDialog />
+        </div>
+        <div class="content" id="home">
+            <Home />
         </div>
     </body>
 </html>
