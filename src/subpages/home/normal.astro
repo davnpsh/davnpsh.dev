@@ -89,7 +89,7 @@ import Dialog from "../../components/dialog.astro";
             if (e.detail === "home") {
                 // Disable bootloader
                 localStorage.setItem("disable-bootloader", "true");
-                
+
                 const contexts = Array.from(
                         document.querySelectorAll(".context"),
                     ),
@@ -191,7 +191,7 @@ import Dialog from "../../components/dialog.astro";
                     }
 
                     // --- SPACEBAR = checkbox ---
-                    if (event.code === "Space") {
+                    if (event.code === "Space" || event.code === "Enter") {
                         event.preventDefault();
 
                         const checkbox =
@@ -199,24 +199,24 @@ import Dialog from "../../components/dialog.astro";
                                 ".checkbox",
                             );
 
-                        if (!checkbox) return;
+                        // Checkbox handle
+                        if (checkbox) {
+                            const span = checkbox.querySelector("span");
+                            const id = span.id;
 
-                        const span = checkbox.querySelector("span");
-                        const id = span.id;
+                            let value = localStorage.getItem(id) === "true";
 
-                        let value = localStorage.getItem(id) === "true";
+                            value = !value;
 
-                        value = !value;
+                            localStorage.setItem(id, value.toString());
 
-                        localStorage.setItem(id, value.toString());
-
-                        span.textContent = value ? "[x]" : "[ ]";
-                    }
-
-                    // --- Enter = select ---
-                    if (event.key === "Enter") {
-                        event.preventDefault();
-                        visit();
+                            span.textContent = value ? "[x]" : "[ ]";
+                        }
+                        // Menu handle
+                        else {
+                            event.preventDefault();
+                            visit();
+                        }
                     }
 
                     // --- Up / Down navigation inside list of entries ---
