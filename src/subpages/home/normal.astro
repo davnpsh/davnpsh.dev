@@ -8,12 +8,12 @@ import Dialog from "../../components/dialog.astro";
         <div slot="description">Welcome to my website!</div>
         <div class="context home entries" slot="entries">
             <ul>
-                <li class="default" data-url="/about">About</li>
-                <li data-url="/projects">Projects</li>
-                <li class="disabled" data-url="https://blog.davnpsh.dev">
+                <li class="entry default" data-url="/about">About</li>
+                <li class="entry" data-url="/projects">Projects</li>
+                <li class="entry disabled" data-url="https://blog.davnpsh.dev">
                     Blog
                 </li>
-                <li data-url="/contact">Contact</li>
+                <li class="entry" data-url="/contact">Contact</li>
             </ul>
         </div>
         <div slot="form" class="form">
@@ -133,10 +133,8 @@ import Dialog from "../../components/dialog.astro";
 
                     // Navigating away effect
                     const content = document.querySelector(".content");
-                    // const bottom_bar = document.querySelector(".bar.bottom");
 
                     content.classList.add("navigating-away");
-                    // bottom_bar.classList.add("navigating-away");
 
                     // Navigate
                     if (/^https?:\/\//.test(url)) {
@@ -167,7 +165,7 @@ import Dialog from "../../components/dialog.astro";
                 // Set initial context
                 setActiveContext(activeContextIndex);
 
-                // Event listeners for navigation
+                // Event listeners for navigation with keys
                 document.addEventListener("keydown", (event) => {
                     if (event.repeat) return;
 
@@ -232,6 +230,49 @@ import Dialog from "../../components/dialog.astro";
                         activeIndex = (activeIndex + 1) % entries.length;
                         updateHighlight();
                     }
+                });
+
+                // Event listeners for navigation with the mouse
+                contexts.forEach((context, ctxIndex) => {
+                    // Hover
+                    context.addEventListener("mouseover", (event) => {
+                        const entryEl = event.target.closest(".entry");
+
+                        if (!entryEl) return;
+
+                        if (activeContextIndex !== ctxIndex) {
+                            activeContextIndex = ctxIndex;
+                            setActiveContext(activeContextIndex);
+                        }
+
+                        const hasEntries =
+                            contexts[activeContextIndex].classList.contains(
+                                "entries",
+                            );
+
+                        if (hasEntries) {
+                            const newIndex = entries.indexOf(entryEl);
+                            if (newIndex !== -1 && newIndex !== activeIndex) {
+                                activeIndex = newIndex;
+                                updateHighlight();
+                            }
+                        }
+                    });
+
+                    // Click
+                    context.addEventListener("click", (event) => {
+                        const checkbox = event.target.closest(".checkbox");
+                        if (checkbox) {
+                            const span = checkbox.querySelector("span");
+                            const id = span.id;
+                            let value = localStorage.getItem(id) === "true";
+                            value = !value;
+                            localStorage.setItem(id, value.toString());
+                            span.textContent = value ? "[x]" : "[ ]";
+                        } else if (event.target.closest(".entry")) {
+                            visit();
+                        }
+                    });
                 });
 
                 // Checkboxes variables initialization
