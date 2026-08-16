@@ -1,7 +1,70 @@
 ---
 import Page from "../layouts/page.astro";
+
+import Avatar from "../assets/images/avatar.jpg";
+
+import TimeMachine from "../components/props/time-machine.astro";
 ---
 
 <Page title="About">
-    
+    <article>
+        <img src={Avatar.src} alt="avatar" class="avatar" />
+
+        <p>
+            I am Daru, an engineer who likes <a
+                href="https://github.com/tsoding">recreational programming</a
+            >. I have interest in operating systems and compilers design,
+            reverse-engineering, computer networking and open source in general.
+        </p>
+        <p>
+            My professional work, hobby projects and open source contributions
+            are related to IoT devices, reverse-engineering and/or systems
+            programming. I've worked with multiple languages in those such as C,
+            Rust, Java, Python and TypeScript.
+        </p>
+
+        <div class="prop"><TimeMachine width="200px" height="200px" /></div>
+
+        <p>
+            Some of my projects, as well as configuration files for my HomeLab
+            and scripts I frequently use are on my <a
+                href="https://github.com/davnpsh">GitHub</a
+            > profile.
+        </p>
+
+        <p>
+            I am also a fan of horror and sci-fi media, which usually subtly
+            inspire some of my projects. Among the media I've consumed the
+            following stand out: <i>Steins;Gate</i>, <i>Another</i>, <i
+                >Resident Evil</i
+            >, <i>Silent Hill</i>, <i>Signalis</i>, etc. Outside of those
+            genres, I also enjoy games which have more cinematic experiences
+            such as <i>The Last of Us</i> or <i>A Plague Tale</i>.
+        </p>
+
+        <p style="clear: both;"></p>
+    </article>
 </Page>
+
+<style>
+    article {
+        width: 100%;
+        color: white;
+        padding: 40px 0;
+        font-size: 22px;
+    }
+
+    article a {
+        color: yellow;
+    }
+
+    article .avatar {
+        height: 200px;
+        float: left;
+        padding: 20px;
+    }
+
+    article .prop {
+        float: right;
+    }
+</style>
