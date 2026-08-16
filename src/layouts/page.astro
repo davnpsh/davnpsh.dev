@@ -1,0 +1,159 @@
+---
+import { Font } from "astro:assets";
+
+import WallpaperTile04 from "../assets/wallpapers/Boutros-Boutros-Ghali-1.jpg";
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/ico" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <Font cssVariable="--font-unifont" />
+        <!-- @ts-ignore: stupid error -->
+        <Font cssVariable="--font-special-elite" />
+        <title>daru's system</title>
+    </head>
+    <body style={`--bg-image: url(${WallpaperTile04.src})`}>
+        <div class="container">
+            <header>
+                <div class="logo">
+                    <span>d</span><span>a</span><span>r</span><span>u</span
+                    ><span>'</span><span>s</span>&nbsp;
+                    <span>s</span><span>y</span><span>s</span><span>t</span
+                    ><span>e</span><span>m</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/"
+                                ><span>H</span><span>o</span><span>m</span><span
+                                    >e</span
+                                ></a>
+                        </li>
+                        <li>
+                            <a href="/about"
+                                ><span>A</span><span>b</span><span>o</span><span
+                                    >u</span
+                                ><span>t</span></a>
+                        </li>
+                        <li>
+                            <a href="/projects"
+                                ><span>P</span><span>r</span><span>o</span><span
+                                    >j</span
+                                ><span>e</span><span>c</span><span>t</span><span
+                                    >s</span
+                                ></a>
+                        </li>
+                        <li>
+                            <a href="/contact"
+                                ><span>C</span><span>o</span><span>n</span><span
+                                    >t</span
+                                ><span>a</span><span>c</span><span>t</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+
+            <main><slot /></main>
+
+            <footer></footer>
+        </div>
+    </body>
+</html>
+
+<style>
+    body {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+            var(--bg-image);
+        background-size: auto;
+        font-family: var(--font-unifont);
+    }
+
+    .container {
+        margin: auto;
+        margin-top: 20px;
+        width: 40%;
+    }
+
+    header {
+        width: 100%;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    @keyframes shake {
+        0%,
+        100% {
+            transform: translate(0, 0) rotate(0deg);
+        }
+        25% {
+            transform: translate(-1px, 1px) rotate(-1deg);
+        }
+        50% {
+            transform: translate(1px, -1px) rotate(1deg);
+        }
+        75% {
+            transform: translate(-1px, -1px) rotate(0.5deg);
+        }
+    }
+
+    header .logo {
+        font-family: var(--font-special-elite);
+        font-size: 30px;
+        font-weight: bold;
+        color: white;
+    }
+
+    header .logo span {
+        display: inline-block;
+        animation: shake 0.2s infinite;
+    }
+
+    header .logo span:nth-child(2n) {
+        animation-delay: 0.1s;
+    }
+
+    header .logo span:nth-child(3n) {
+        animation-delay: 0.15s;
+    }
+
+    header .logo span:nth-child(4n) {
+        animation-delay: 0.2s;
+    }
+
+    header nav ul {
+        list-style: none;
+        display: flex;
+        gap: 30px;
+    }
+
+    header nav ul li a {
+        text-decoration: none;
+        font-weight: bold;
+        color: white;
+        font-size: 18px;
+    }
+
+    header nav ul li a:hover span {
+        display: inline-block;
+        animation: shake 0.2s infinite;
+    }
+
+    header nav ul li a span:nth-child(2n) {
+        animation-delay: 0.1s;
+    }
+
+    header nav ul li a span:nth-child(3n) {
+        animation-delay: 0.15s;
+    }
+
+    header nav ul li a span:nth-child(4n) {
+        animation-delay: 0.2s;
+    }
+</style>

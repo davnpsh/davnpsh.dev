@@ -18,5 +18,10 @@ export default defineConfig({
         ],
       },
     },
+    {
+      provider: fontProviders.fontsource(),
+      name: "Special Elite",
+      cssVariable: "--font-special-elite",
+    },
   ],
 });
