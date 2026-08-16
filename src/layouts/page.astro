@@ -1,9 +1,20 @@
 ---
-import { Font } from "astro:assets";
+import { Font, Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 
 import WallpaperTile04 from "../assets/wallpapers/Boutros-Boutros-Ghali-1.jpg";
 
+import ynBadge from "../assets/badges/beyes.gif";
+import blinkBadge from "../assets/badges/blink-0.gif";
+import fedoraBadge from "../assets/badges/fedora.gif";
+import htmlBadge from "../assets/badges/gethtmlnow.gif";
+import githubBadge from "../assets/badges/github.gif";
+import linuxBadge from "../assets/badges/gnu-linux.gif";
+import xpBadge from "../assets/badges/xp.gif";
+
 import "./crt.css";
+
+const { title = "default" } = Astro.props;
 ---
 
 <html lang="en">
@@ -64,9 +75,41 @@ import "./crt.css";
                 </nav>
             </header>
 
-            <main><slot /></main>
+            <main>
+                <h1>{title}</h1>
+                <slot />
+            </main>
 
-            <footer></footer>
+            <footer>
+                <Image
+                    src={ynBadge}
+                    alt=""
+                />
+                <Image
+                    src={blinkBadge}
+                    alt=""
+                />
+                <Image
+                    src={fedoraBadge}
+                    alt=""
+                />
+                <Image
+                    src={githubBadge}
+                    alt=""
+                />
+                <Image
+                    src={linuxBadge}
+                    alt=""
+                />
+                <Image
+                    src={xpBadge}
+                    alt=""
+                />
+                <Image
+                    src={htmlBadge}
+                    alt=""
+                />
+            </footer>
         </div>
     </body>
 </html>
@@ -77,7 +120,7 @@ import "./crt.css";
         margin: 0;
         box-sizing: border-box;
     }
-    
+
     body {
         background-image:
             linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
@@ -169,5 +212,23 @@ import "./crt.css";
 
     header nav ul li a span:nth-child(4n) {
         animation-delay: 0.2s;
+    }
+
+    main {
+        margin-top: 60px;
+        margin-bottom: 40px;
+    }
+
+    main h1 {
+        text-align: center;
+        color: white;
+        font-family: var(--font-special-elite);
+    }
+
+    footer {
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
     }
 </style>
