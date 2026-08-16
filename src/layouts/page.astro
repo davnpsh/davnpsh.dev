@@ -2,6 +2,8 @@
 import { Font } from "astro:assets";
 
 import WallpaperTile04 from "../assets/wallpapers/Boutros-Boutros-Ghali-1.jpg";
+
+import "./crt.css";
 ---
 
 <html lang="en">
@@ -17,6 +19,7 @@ import WallpaperTile04 from "../assets/wallpapers/Boutros-Boutros-Ghali-1.jpg";
         <title>daru's system</title>
     </head>
     <body style={`--bg-image: url(${WallpaperTile04.src})`}>
+        <div class="crt"></div>
         <div class="container">
             <header>
                 <div class="logo">
@@ -69,17 +72,24 @@ import WallpaperTile04 from "../assets/wallpapers/Boutros-Boutros-Ghali-1.jpg";
 </html>
 
 <style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    
     body {
         background-image:
             linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
             var(--bg-image);
         background-size: auto;
         font-family: var(--font-unifont);
+        position: relative;
     }
 
     .container {
         margin: auto;
-        margin-top: 20px;
+        padding-top: 20px;
         width: 40%;
     }
 
