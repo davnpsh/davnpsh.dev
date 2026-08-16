@@ -6,7 +6,7 @@ import Tty from "../../layouts/tty.astro";
     <div class="grub">
         <p class="version fade-step">Bootloader &nbsp;version 0.0.1~alpha</p>
         <div class="menu-box fade-step">
-            <ul class="entries">
+            <ul class="grub-entries">
                 <li class="default">davnpsh.dev</li>
                 <li>Source code for davnpsh.dev</li>
             </ul>
@@ -61,22 +61,22 @@ import Tty from "../../layouts/tty.astro";
         padding-bottom: 300px;
     }
 
-    .grub .menu-box .entries {
+    .grub .menu-box .grub-entries {
         list-style: none;
     }
 
-    .grub .menu-box .entries li {
+    .grub .menu-box .grub-entries li {
         padding: 1px 10px;
         margin: 0 3px;
     }
 
-    .grub .menu-box .entries li.selected {
+    .grub .menu-box .grub-entries li.selected {
         background-color: #989898;
         color: black;
         /*font-weight: bold;*/
     }
 
-    .grub .menu-box .entries li.selected.default::before {
+    .grub .menu-box .grub-entries li.selected.default::before {
         content: "*";
         position: absolute;
         left: 6px;
@@ -84,7 +84,7 @@ import Tty from "../../layouts/tty.astro";
         /*font-weight: bold;*/
     }
 
-    .grub .menu-box .entries li.default::before {
+    .grub .menu-box .grub-entries li.default::before {
         content: "*";
         position: absolute;
         left: 6px;
@@ -149,7 +149,7 @@ import Tty from "../../layouts/tty.astro";
         document.addEventListener("stage-change", (e: any) => {
             if (e.detail === "grub") {
                 const entries = Array.from(
-                    document.querySelectorAll(".entries li"),
+                    document.querySelectorAll(".grub-entries li"),
                 );
                 const reminderMessage = document.querySelector(".reminder");
                 const secondsBox = document.querySelector(".seconds");
