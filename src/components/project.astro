@@ -1,0 +1,121 @@
+---
+interface Image {
+    src: string;
+    alt: string;
+}
+
+interface Project {
+    title: string;
+    url: string;
+    langs: string;
+    description: string;
+    readme: string;
+    images: Image[];
+}
+
+interface Props {
+    project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<div class="card">
+    <p class="card-langs">{project.langs}</p>
+
+    <p class="card-title">{project.title}</p>
+    <p class="card-description">{project.description}</p>
+
+    <div class="card-readme" set:html={project.readme} />
+
+    <div class="card-images">
+        {
+            project.images.length !== 0 &&
+                project.images.map((image) => (
+                    <a href={image.src + "?url"}>
+                        <img src={image.src + "?url"} alt={image.alt} />
+                    </a>
+                ))
+        }
+    </div>
+    <a href={project.url} class="card-link"></a>
+</div>
+
+<style>
+    .card-link {
+        text-decoration: none;
+        display: block;
+    }
+
+    .card {
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        padding: 10px;
+        position: relative;
+    }
+
+    .card:hover .card-title {
+        color: yellow;
+    }
+
+    .card .card-langs {
+        color: white;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .card .card-title {
+        color: white;
+        font-weight: bold;
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .card .card-description {
+        color: #c2c2c2;
+        margin-bottom: 20px;
+        font-style: italic;
+        font-size: 18px;
+    }
+
+    .card .card-readme {
+        color: white;
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .card .card-readme :global(p) {
+        color: white;
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+
+    .card .card-readme :global(a) {
+        color: yellow;
+        z-index: 1;
+        position: relative;
+    }
+
+    .card .card-images {
+        width: 100%;
+        display: flex;
+        gap: 5px;
+    }
+
+    .card .card-images a {
+        display: block;
+        width: 50%;
+        z-index: 1;
+    }
+
+    .card .card-images img {
+        width: 100%;
+    }
+
+    .card .card-link::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+    }
+</style>
