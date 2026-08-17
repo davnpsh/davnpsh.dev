@@ -80,34 +80,13 @@ const { title = "default" } = Astro.props;
             </main>
 
             <footer>
-                <Image
-                    src={ynBadge}
-                    alt=""
-                />
-                <Image
-                    src={blinkBadge}
-                    alt=""
-                />
-                <Image
-                    src={fedoraBadge}
-                    alt=""
-                />
-                <Image
-                    src={githubBadge}
-                    alt=""
-                />
-                <Image
-                    src={linuxBadge}
-                    alt=""
-                />
-                <Image
-                    src={xpBadge}
-                    alt=""
-                />
-                <Image
-                    src={htmlBadge}
-                    alt=""
-                />
+                <Image src={ynBadge} alt="" />
+                <Image src={blinkBadge} alt="" />
+                <Image src={fedoraBadge} alt="" />
+                <Image src={githubBadge} alt="" />
+                <Image src={linuxBadge} alt="" />
+                <Image src={xpBadge} alt="" />
+                <Image src={htmlBadge} alt="" />
             </footer>
         </div>
     </body>
@@ -227,7 +206,32 @@ const { title = "default" } = Astro.props;
     footer {
         margin: 20px 0;
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         gap: 5px;
+    }
+
+    /* RESPONSIVE-NESS */
+    @media (max-width: 1920px) {
+        .container {
+            width: 60%;
+        }
+    }
+
+    @media (max-width: 1280px) {
+        .container {
+            width: 80%;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .container {
+            width: 95%;
+        }
+
+        header {
+            flex-direction: column;
+            gap: 20px;
+        }
     }
 </style>

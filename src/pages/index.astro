@@ -11,6 +11,11 @@ import "../layouts/crt.css";
 
 <html lang="en">
     <head>
+        <script is:inline>
+            if (window.innerWidth <= 1024) {
+                window.location.href = "/mobile";
+            }
+        </script>
         <meta charset="utf-8" />
         <link rel="icon" type="image/ico" href="/favicon.ico" />
         <link rel="icon" href="/favicon.ico" />
@@ -40,7 +45,7 @@ import "../layouts/crt.css";
     body {
         position: relative;
     }
-    
+
     .content {
         display: none;
     }

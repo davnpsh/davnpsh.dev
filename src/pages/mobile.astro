@@ -1,0 +1,23 @@
+---
+import Page from "../layouts/page.astro";
+
+import TimeMachine from "../components/props/time-machine.astro";
+---
+
+<Page title="Welcome">
+    <article>
+        <p>This website provides a better experience on desktop!</p>
+
+        <div class="prop"><TimeMachine width="100%" height="400px" /></div>
+    </article>
+</Page>
+
+<style>
+    article {
+        width: 100%;
+        color: white;
+        padding: 40px 0;
+        font-size: 22px;
+        text-align: center;
+    }
+</style>
