@@ -7,10 +7,10 @@
     "readme": "<p>elmo (/ˈɛl.moʊ/) is a text editor focused on viewing and editing simple configuration and source code files.</p><p>It is derived from <a href='https://github.com/antirez/kilo'>kilo</a>, as I was following this excellent <a href='https://viewsourcecode.org/snaptoken/kilo'>tutorial</a> while building it. While most of the front-end features are similar to kilo, elmo has its own buffer back-end design.</p>",
     "images": [
       {
-        "src": "src/assets/images/projects/elmo-01.png",
+        "src": "../assets/images/projects/elmo-01.png",
         "alt": "Editing a file"
       },
-      { "src": "src/assets/images/projects/elmo-02.png", "alt": "Welcome text" }
+      { "src": "../assets/images/projects/elmo-02.png", "alt": "Welcome text" }
     ]
   }
 ]
