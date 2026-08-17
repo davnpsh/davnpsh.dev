@@ -1,4 +1,4 @@
-# Website (rewrite branch)
+# Website
 
 Source code and resources of my personal site.
 
