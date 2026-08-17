@@ -57,6 +57,12 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 </div>
 
 <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
     .card-link {
         text-decoration: none;
         display: block;
@@ -115,6 +121,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
     .card .card-images {
         width: 100%;
         display: flex;
+        flex-wrap: nowrap;
         gap: 5px;
     }
 
